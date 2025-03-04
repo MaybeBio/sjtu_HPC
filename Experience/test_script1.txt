@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#SBATCH --job-name=quast
+#SBATCH --partition=cpu
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=40
+#SBATCH --output=./%j.out
+#SBATCH --error=./%j.err
+#SBATCH --exclusive
+
+racon1=~/wlTsang/assembly/RACON/wtdbg.raw.racon1.fa
+
+module load miniconda3
+source activate busco
+busco -i $racon1 -m genome -l metazoa_odb10 -c 24 -o ./racon1.meta
